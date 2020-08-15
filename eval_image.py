@@ -19,7 +19,7 @@ def parse_args():
                         help="path to deploy prototxt.", type=str)
     parser.add_argument('--model', dest='model', default='mobilenet_v2.caffemodel',
                         help='path to pretrained weights', type=str)
-    parser.add_argument('--image', dest='image', default='cat.jpg',
+    parser.add_argument('--image', dest='image', default='000029.jpg',
                         help='path to color image', type=str)
 
     args = parser.parse_args()
@@ -40,6 +40,7 @@ def eval():
 
     im = caffe.io.load_image(args.image)
     print('im.shape:', im.shape)
+    """
     h, w, _ = im.shape
     if h < w:
         off = (w - h) // 2
@@ -47,6 +48,7 @@ def eval():
     else:
         off = (h - w) // 2
         im = im[off:off + h, :]
+    """
     im = caffe.io.resize_image(im, [nh, nw])
 
     transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
