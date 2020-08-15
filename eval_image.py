@@ -3,6 +3,7 @@
 from __future__ import print_function
 import argparse
 import numpy as np
+import cv2
 
 import sys
 sys.path.insert(1, "/home/zz/work/caffe-BVLC/python")
@@ -38,8 +39,9 @@ def eval():
     caffe.set_mode_cpu()
     net = caffe.Net(args.proto, args.model, caffe.TEST)
 
-    im = caffe.io.load_image(args.image)
-    print('im.shape:', im.shape)
+    #im = caffe.io.load_image(args.image)
+    im = cv2.imread(args.image)
+    #print('im.shape:', im.shape)
     """
     h, w, _ = im.shape
     if h < w:
@@ -49,14 +51,29 @@ def eval():
         off = (h - w) // 2
         im = im[off:off + h, :]
     """
-    im = caffe.io.resize_image(im, [nh, nw])
+    #im = caffe.io.resize_image(im, [nh, nw])
+
+    # bgr => rgb
+    im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
+
+    # resize
+    im = cv2.resize(im, (nw, nh))
+
+    # uint8 => float
+    im = im.astype(np.float)
+
+    # subtract mean
+    im -= img_mean
+
+    # norm
+    im = im*0.017
 
     transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
     transformer.set_transpose('data', (2, 0, 1))  # row to col
-    transformer.set_channel_swap('data', (2, 1, 0))  # RGB to BGR
-    transformer.set_raw_scale('data', 255)  # [0,1] to [0,255]
-    transformer.set_mean('data', img_mean)
-    transformer.set_input_scale('data', 0.017)
+    #transformer.set_channel_swap('data', (2, 1, 0))  # RGB to BGR
+    #transformer.set_raw_scale('data', 255)  # [0,1] to [0,255]
+    #transformer.set_mean('data', img_mean)
+    #transformer.set_input_scale('data', 0.017)
 
     net.blobs['data'].reshape(1, 3, nh, nw)
     net.blobs['data'].data[...] = transformer.preprocess('data', im)
@@ -68,7 +85,7 @@ def eval():
     label_names = np.loadtxt('synset.txt', str, delimiter='\t')
     for i in range(5):
         label = idx[i]
-        print('%.2f - %s' % (prob[label], label_names[label]))
+        print('%d - %.6f - %s' % (label, prob[label], label_names[label]))
     return
 
 
