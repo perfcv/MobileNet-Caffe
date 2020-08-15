@@ -1,5 +1,14 @@
 # MobileNet-Caffe
 
+### Disclaimer
+
+This repo is forked from [shicai's MobileNet-Caffe](https://github.com/shicai/MobileNet-Caffe), adding Python3 support, with updated prototxt input layer.
+
+To use, you may also require a Python3 compatible Caffe, download it via:
+```bash
+git clone https://gitee.com/aczz/caffe-BVLC -b aczz
+```
+
 ### Introduction
 
 This is a Caffe implementation of Google's MobileNets (v1 and v2). For details, please read the following papers:

@@ -1,20 +1,27 @@
+# coding: utf-8
+
 from __future__ import print_function
 import argparse
 import numpy as np
+
+import sys
+sys.path.insert(1, "/home/zz/work/caffe-BVLC/python")
+
 import caffe
 
 
 def parse_args():
     parser = argparse.ArgumentParser(
         description='evaluate pretrained mobilenet models')
-    parser.add_argument('--proto', dest='proto',
+    parser.add_argument('--proto', dest='proto', default='mobilenet_v2_deploy_ok.prototxt',
                         help="path to deploy prototxt.", type=str)
-    parser.add_argument('--model', dest='model',
+    parser.add_argument('--model', dest='model', default='mobilenet_v2.caffemodel',
                         help='path to pretrained weights', type=str)
-    parser.add_argument('--image', dest='image',
+    parser.add_argument('--image', dest='image', default='cat.jpg',
                         help='path to color image', type=str)
 
     args = parser.parse_args()
+    print('args are', args)
     return args, parser
 
 
@@ -30,12 +37,13 @@ def eval():
     net = caffe.Net(args.proto, args.model, caffe.TEST)
 
     im = caffe.io.load_image(args.image)
+    print('im.shape:', im.shape)
     h, w, _ = im.shape
     if h < w:
-        off = (w - h) / 2
+        off = (w - h) // 2
         im = im[:, off:off + h]
     else:
-        off = (h - w) / 2
+        off = (h - w) // 2
         im = im[off:off + h, :]
     im = caffe.io.resize_image(im, [nh, nw])
 

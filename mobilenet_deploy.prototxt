@@ -1,15 +1,25 @@
 name: "MOBILENET"
+
 #  transform_param {
 #    scale: 0.017
 #    mirror: false
 #    crop_size: 224
 #    mean_value: [103.94,116.78,123.68]
 #  }
-input: "data"
-input_dim: 1
-input_dim: 3
-input_dim: 224
-input_dim: 224
+
+layer {
+  name: "input"
+  type: "Input"
+  top: "data"
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 224
+      dim: 224
+    }
+  }
+}
 layer {
   name: "conv1"
   type: "Convolution"
@@ -49,7 +59,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -96,11 +106,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 32
-    engine: CAFFE
     stride: 1
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -122,7 +132,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -193,7 +203,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -240,11 +250,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 64
-    engine: CAFFE
     stride: 2
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -266,7 +276,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -337,7 +347,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -384,11 +394,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 128
-    engine: CAFFE
     stride: 1
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -410,7 +420,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -481,7 +491,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -528,11 +538,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 128
-    engine: CAFFE
     stride: 2
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -554,7 +564,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -625,7 +635,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -672,11 +682,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 256
-    engine: CAFFE
     stride: 1
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -698,7 +708,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -769,7 +779,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -816,11 +826,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 256
-    engine: CAFFE
     stride: 2
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -842,7 +852,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -913,7 +923,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -960,11 +970,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 512
-    engine: CAFFE
     stride: 1
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -986,7 +996,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1057,7 +1067,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1104,11 +1114,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 512
-    engine: CAFFE
     stride: 1
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -1130,7 +1140,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1201,7 +1211,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1248,11 +1258,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 512
-    engine: CAFFE
     stride: 1
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -1274,7 +1284,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1345,7 +1355,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1392,11 +1402,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 512
-    engine: CAFFE
     stride: 1
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -1418,7 +1428,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1489,7 +1499,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1536,11 +1546,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 512
-    engine: CAFFE
     stride: 1
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -1562,7 +1572,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1633,7 +1643,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1680,11 +1690,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 512
-    engine: CAFFE
     stride: 2
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -1706,7 +1716,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1777,7 +1787,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1824,11 +1834,11 @@ layer {
     pad: 1
     kernel_size: 3
     group: 1024
-    engine: CAFFE
     stride: 1
     weight_filler {
       type: "msra"
     }
+    engine: CAFFE
   }
 }
 layer {
@@ -1850,7 +1860,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
@@ -1921,7 +1931,7 @@ layer {
   }
   batch_norm_param {
     use_global_stats: true
-    eps: 1e-5
+    eps: 1e-05
   }
 }
 layer {
