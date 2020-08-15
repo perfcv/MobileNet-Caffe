@@ -7,13 +7,15 @@ import numpy as np
 import sys
 sys.path.insert(1, "/home/zz/work/caffe-BVLC/python")
 
+import os
+os.environ['GLOG_minloglevel'] = '2'
 import caffe
 
 
 def parse_args():
     parser = argparse.ArgumentParser(
         description='evaluate pretrained mobilenet models')
-    parser.add_argument('--proto', dest='proto', default='mobilenet_v2_deploy_ok.prototxt',
+    parser.add_argument('--proto', dest='proto', default='mobilenet_v2_deploy.prototxt',
                         help="path to deploy prototxt.", type=str)
     parser.add_argument('--model', dest='model', default='mobilenet_v2.caffemodel',
                         help='path to pretrained weights', type=str)
